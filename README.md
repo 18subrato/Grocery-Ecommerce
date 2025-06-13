@@ -1,1 +1,1 @@
-link : https://grocery-ecommerce-one.vercel.app/login
+link : https://grocery-ecommerce-one.vercel.app/
