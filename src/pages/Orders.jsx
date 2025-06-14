@@ -70,7 +70,7 @@ const Orders = () => {
                       <div>
                         <h4 className="font-medium text-gray-800">{item.name}</h4>
                         <p className="text-sm text-gray-500">
-                          Qty: {item.quantity} × {currency}{item.price}
+                          Qty: {item.quantity} x {currency}{item.price}
                         </p>
                       </div>
                     </div>

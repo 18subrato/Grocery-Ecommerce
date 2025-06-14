@@ -16,7 +16,7 @@ const Cart = () => {
             const parsedAddress = JSON.parse(addressFound);
             setUserAddress(parsedAddress);
         }
-    }, [location.key])
+    }, [location.key,setUserAddress])
     function handlePlaceOrder() {
         if (cartItems.length == 0) {
             toast.error('Cart is Empty');
