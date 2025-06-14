@@ -1,24 +1,39 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useShopContext } from '../context/ShopContext'
 import { MdDeleteForever } from "react-icons/md";
 import { toast } from 'react-toastify';
+import { useLocation } from 'react-router-dom';
 
 const Cart = () => {
-    const { cartItems, removeFromCart, navigate, currency, getCartAmount, userAddress } = useShopContext();
+    const { cartItems, removeFromCart, navigate, currency, getCartAmount, userAddress, setUserAddress } = useShopContext();
 
-    const [paymentMethod,setPaymentMethod] = useState(null);
+    const [paymentMethod, setPaymentMethod] = useState(null);
+    const location = useLocation();
 
+    useEffect(() => {
+        const addressFound = localStorage.getItem('address');
+        if (addressFound) {
+            const parsedAddress = JSON.parse(addressFound);
+            setUserAddress(parsedAddress);
+        }
+    }, [location.key])
     function handlePlaceOrder() {
-        if(cartItems.length == 0){
+        if (cartItems.length == 0) {
             toast.error('Cart is Empty');
             return;
-        } 
+        }
 
-        if(paymentMethod !== 'COD'){
+        if (!userAddress) {
+            toast.error('Please Add Address');
+            return;
+        }
+
+        if (paymentMethod !== 'COD') {
             toast.error('Select Payment Mode');
             return;
         }
-        
+
+
         const orderData = {
             cartItems: JSON.parse(JSON.stringify(cartItems)),
             userAddress: { ...userAddress },
@@ -36,9 +51,9 @@ const Cart = () => {
         toast.success('Order Placed Successfully')
     }
 
-    function handlePaymentMode(paymentMode){
-        if(paymentMode === 'cod'){
-            setPaymentMethod('COD') 
+    function handlePaymentMode(paymentMode) {
+        if (paymentMode === 'cod') {
+            setPaymentMethod('COD')
         } else {
             toast.error('Online Payment Not Available')
         }
@@ -84,8 +99,8 @@ const Cart = () => {
                     <div className='mt-6'>
                         <p className='text-lg text-gray-700'>Payment Method</p>
                         <div className='border border-gray-300 flex flex-col justify-center gap-2 w-[200px] sm:w-[250px] xl:w-full p-1'>
-                            <p><input type='checkbox' value={paymentMethod}  onClick={()=>handlePaymentMode('cod')} className='mr-2' />Cash on Delivery</p>
-                            <p><input className='mr-2' value={paymentMethod} onClick={()=>handlePaymentMode('online')} type='checkbox' />Online Payment</p>
+                            <p><input type='checkbox' value={paymentMethod} onClick={() => handlePaymentMode('cod')} className='mr-2' />Cash on Delivery</p>
+                            <p><input className='mr-2' value={paymentMethod} onClick={() => handlePaymentMode('online')} type='checkbox' />Online Payment</p>
                         </div>
                     </div>
                     <hr className='mt-6 border border-gray-300' />

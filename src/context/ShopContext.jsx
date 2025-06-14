@@ -9,13 +9,11 @@ const ShopContext = createContext();
 const ShopContextProvider = ({ children }) => {
     const currency = '\u20B9';
     const navigate = useNavigate();
-    const [user,setUser] = useState(localStorage.getItem('Login') ? JSON.parse(localStorage.getItem('Login')):null);
+    const [user,setUser] = useState(localStorage.getItem('Login') ? JSON.parse(localStorage.getItem('Login')) : null);
     const [products, setProducts] = useState([]);            
     const [cartItems, setCartItems] = useState([]);         
     const [userAddress, setUserAddress] = useState(null);
-
     const [search,setSearch] = useState('');
-
     async function fetchProducts() {
         setProducts(dummyProducts)
     }
@@ -66,15 +64,14 @@ const ShopContextProvider = ({ children }) => {
 
         return Math.floor(totalAmount);
     }
-
     useEffect(() => {
         fetchProducts();
-        let addressFound = localStorage.getItem('address') ? JSON.parse(localStorage.getItem('address')) : null;
-        setUserAddress(addressFound);
     }, [])
 
+    
 
-    const value = { products, currency, navigate, addToCart, getCartCount, cartItems, updateQuantity, removeFromCart, search, setSearch, user, setUser, getCartAmount, userAddress };
+
+    const value = { products, currency, navigate, addToCart, getCartCount, cartItems, updateQuantity, removeFromCart, search, setSearch, user, setUser, getCartAmount, userAddress, setUserAddress };
     return <ShopContext.Provider value={value}>
         {children}
     </ShopContext.Provider>

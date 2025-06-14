@@ -15,7 +15,7 @@ const Orders = () => {
 
   if (orders.length === 0) {
     return (
-      <div className="text-center py-10 text-gray-600">No orders found.</div>
+      <div className="text-center py-10 lg:text-xl xl:text-3xl text-red-600">No orders found.</div>
     );
   }
 

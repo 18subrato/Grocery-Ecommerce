@@ -45,7 +45,11 @@ const App = () => {
           <Route path='/add-address' element={<AddAddress />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Register />} />
-          <Route path='/orders' element={<Orders />} />
+          <Route path='/orders' element={
+            <ProtectedRoute>
+              <Orders/>
+            </ProtectedRoute>
+          } />
           <Route path='/privacy-policy' element={<PrivacyPolicy/>} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>
