@@ -51,8 +51,8 @@ const ShopContextProvider = ({ children }) => {
         const existingProduct = cartItems.find((item) => item.id === id);
         if (existingProduct) {
             return existingProduct.quantity;
-        } else {
-            return cartItems.length;
+        // } else {
+        //     return cartItems.length;
         }
     }
     getCartCount();

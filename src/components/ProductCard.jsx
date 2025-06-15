@@ -15,7 +15,7 @@ const ProductCard = ({product}) => {
         <p className='text-gray-700 text-sm md:text-lg font-medium'>{product.name}</p>
       </div>
       <div className='flex items-center gap-0.5'>
-        <p className='text-gray-500 text-sm'>Rating : ({(4+Math.random()).toFixed(1)})</p>
+        <p className='text-gray-500 text-sm'>Rating : (4.5)</p>
       </div>
       <div className=' flex justify-between p-2 flex-col sm:flex-row'>
         <div className='flex items-center gap-2'>
