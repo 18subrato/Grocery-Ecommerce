@@ -9,22 +9,13 @@ import { toast } from 'react-toastify';
 
 const NavBar = () => {
     const [openList, setOpenList] = useState(false);
-    const { navigate, setSearch, user, axios, setUser, cartItems } = useShopContext();
+    const { navigate, setSearch, user, setUser, cartItems } = useShopContext();
     const location = useLocation();
 
     async function logout() {
-        try {
-            const { data } = await axios.get('/api/user/logout');
-            if (data.success) {
-                toast.success(data.message);
-                setUser(null);
-                navigate('/login');
-            } else {
-                toast.error(data.message);
-            }
-        } catch (error) {
-            toast.error(error.message);
-        }
+        localStorage.removeItem('Login');
+        setUser(null);
+        toast.success('Logged Out');
     }
 
     function handleSearch(e) {
